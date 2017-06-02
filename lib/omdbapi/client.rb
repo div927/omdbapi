@@ -21,7 +21,7 @@ module OMDB
     # @example
     #   OMDB.title('Game of Thrones')
     def title(title, options = {})
-      options.merge!(title: title)
+      options.merge!(title: title,apikey:"ae6969ba")
       params = build_params(options)
       get '/', params
     end
@@ -34,7 +34,7 @@ module OMDB
     # @example
     #   OMDB.id('tt0944947')
     def id(imdb_id, options = {})
-      options.merge!(id: imdb_id)
+      options.merge!(id: imdb_id,apikey:"ae6969ba")
       params = build_params(options)
       get '/', params
     end
@@ -90,6 +90,7 @@ module OMDB
         params[:type] = options[:type] if options[:type]
         params[:tomatoes] = options[:tomatoes] if options[:tomatoes]
         params[:apikey] = "ae6969ba"
+        params[:apikey] = options[:apikey] if options[:apikey]
         params
       end
 
