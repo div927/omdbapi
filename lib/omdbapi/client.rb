@@ -8,6 +8,10 @@ module OMDB
     include HTTParty
     base_uri OMDB::Default::API_ENDPOINT
 
+    def initialize(apikey)
+      @apikey = apikey
+    end
+
     # Retrieves a movie or show based on its title.
     #
     # @param title [String] The title of the movie or show.
@@ -21,7 +25,7 @@ module OMDB
     # @example
     #   OMDB.title('Game of Thrones')
     def title(title, options = {})
-      options.merge!(title: title,apikey:"ae6969ba")
+      options.merge!(title: title,apikey:@apikey)
       params = build_params(options)
       get '/', params
     end
@@ -34,7 +38,7 @@ module OMDB
     # @example
     #   OMDB.id('tt0944947')
     def id(imdb_id, options = {})
-      options.merge!(id: imdb_id,apikey:"ae6969ba")
+      options.merge!(id: imdb_id,apikey:@apikey)
       params = build_params(options)
       get '/', params
     end
@@ -89,7 +93,7 @@ module OMDB
         params[:episode] = options[:episode] if options[:episode]
         params[:type] = options[:type] if options[:type]
         params[:tomatoes] = options[:tomatoes] if options[:tomatoes]
-        params[:apikey] = "ae6969ba"
+        params[:apikey] = @apikey
         params[:apikey] = options[:apikey] if options[:apikey]
         params
       end
